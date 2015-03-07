@@ -1,6 +1,6 @@
 {
   "name": "filesync",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "[WorkInProgress - ProofOfConcept] Unidirectional 1-N file syncing with history and local merging",
   "scripts": {
     "start": "./bin/filesync",
