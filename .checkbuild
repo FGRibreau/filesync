@@ -1,0 +1,32 @@
+{
+  "checkbuild": {
+    "enable": ["david", "jshint", "buddyjs", "nsp"],
+    // don't exit immediately if one of the tools reports an error (default true)
+    "continueOnError": true,
+    // don't exit(1) even if we had some failures (default false)
+    "allowFailures": false
+  },
+  "jshint": {
+    "args": ["public/app/**/*.js"]
+  },
+  "plato": {
+    "args": ["public/app/**/*.js"]
+  },
+  "jscs": {
+    "args": ["public/app/**/*.js"]
+  },
+  "jsinspect": {
+    "args": ["public/app/**/*.js"],
+    "diff": true
+  },
+  "buddyjs": {
+    "args": ["public/app/**/*.js"],
+    "ignore": [0, 1, 200]
+  },
+  "david": {
+    "error": {
+      "ESCM": false
+    }
+  },
+  "nsp": {}
+}
