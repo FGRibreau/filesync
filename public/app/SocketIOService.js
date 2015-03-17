@@ -21,6 +21,11 @@ angular.module('FileSync')
 			});
 		});
 
+		socket.on('error:auth', function (err) {
+			// @todo yeurk
+			alert(err);
+		});
+
 		return {
 			onFileChanged: function (f) {
 				_onFileChanged = f;

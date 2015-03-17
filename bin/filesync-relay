@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+node ../relay.js $1

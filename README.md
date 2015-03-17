@@ -29,7 +29,8 @@ FileSync was first made during a lecture on AngularJS/Socket.io/NodeJS with IUT 
 
 ```
 npm i filesync -g
-filesync /path/to/directory
+filesync-server /path/to/directory
+filesync-relay
 ```
 
 ## Contribute / TODO
