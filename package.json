@@ -7,7 +7,7 @@
     "postinstall": "bower install"
   },
   "bin": {
-    "filesync-relay": "./bin/filesync-relay"
+    "filesync-relay": "./bin/filesync-relay",
     "filesync-server": "./bin/filesync-server"
   },
   "author": "Francois-Guillaume Ribreau <npm@fgribreau.com> (http://fgribreau.com/)",
