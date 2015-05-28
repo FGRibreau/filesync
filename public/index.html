@@ -20,25 +20,25 @@
         <div class="row-fluid">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
-		          <div class="row">
+	      <div class="row">
 
-              <div class="cell col-xs-2">
-                {{ edit.timestamp | date : format : shortTime }}
-              </div>
+                <div class="cell col-xs-2">
+                  {{ edit.timestamp | date : format : shortTime }}
+                </div>
 
-              <div class="cell col-xs-9 filename">
-                {{ edit.filename }}
-              </div>
+                <div class="cell col-xs-9 filename">
+                  {{ edit.filename }}
+                </div>
 
-              <div class="cell col-xs-1 options">
-                <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
-              </div>
+                <div class="cell col-xs-1 options">
+                  <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
+                </div>
 
-	            <div class="col-xs-12">
-                <div hljs source="edit.content">
-                  <textarea></textarea>
-  	            </div>
-		          </div>
+	        <div class="col-xs-12">
+                  <div hljs source="edit.content">
+                    <textarea></textarea>
+  	          </div>
+	        </div>
 
               </div>
 
