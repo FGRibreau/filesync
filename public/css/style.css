@@ -57,3 +57,15 @@
     height: 30px;
     opacity: 1;
 }
+
+#content {
+  margin-top: 50px;
+}
+
+#totem.active {
+  color: #006699;
+}
+
+#totem {
+  color: #777;
+}

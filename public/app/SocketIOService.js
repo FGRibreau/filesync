@@ -35,6 +35,14 @@ angular.module('FileSync')
 				_onVisibilityStatesChanged = f;
 			},
 
+			amIAdmin: function(f){
+				socket.emit('amIAdmin', f);
+			},
+
+			changeTotemOwner: function(f){
+				socket.emit('changeTotemOwner', f)
+			},
+
 			userChangedState: function (state) {
 				socket.emit('user-visibility:changed', state);
 			}

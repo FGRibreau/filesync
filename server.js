@@ -41,12 +41,16 @@ sio.on('connection', function (socket) {
   });
 
   socket.visibility = 'visible';
-
+  
   socket.on('user-visibility:changed', function (state) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
-});
+
+  socket.on('amIAdmin', function(f){
+    f(socket.conn.request.isAdmin);
+  });
+  });
 
 function getVisibilityCounts() {
   return _.chain(sio.sockets.sockets).values().countBy('visibility').value();
