@@ -11,6 +11,7 @@
   <body>
     <div class="container" ng-controller="HistoryCtrl as history">
       <div class="history">
+
         <div class="row-fluid">
           <h4 class="col-xs-12">File History {{ history.visibility.states }}</h4>
           <notify-error></notify-error>
@@ -19,6 +20,8 @@
         <div class="row-fluid">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
+		          <div class="row">
+
               <div class="cell col-xs-2">
                 {{ edit.timestamp | date : format : shortTime }}
               </div>
@@ -31,9 +34,14 @@
                 <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
               </div>
 
-              <div hljs source="edit.content">
-                <textarea></textarea>
+	            <div class="col-xs-12">
+                <div hljs source="edit.content">
+                  <textarea></textarea>
+  	            </div>
+		          </div>
+
               </div>
+
             </div><!-- /line -->
 
           </div>
