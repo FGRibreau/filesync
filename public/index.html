@@ -15,7 +15,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">FileSync</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="HistoryCtrl as history">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
@@ -25,19 +25,20 @@
             <li><a href="#">
               <span class="fa-stack-1x">
                 <i class="fa fa-eye fa-2x"></i>
-                <i>20</i>
+                <i>{{ history.visibility.states.visible == null ? 0 : history.visibility.states.visible  }}</i>
               </span>
             </a></li>
             <li><a href="#">
               <span class="fa-stack-1x">
                 <i class="fa fa-eye-slash fa-2x"></i>
-                <i>5</i>
+                <i>{{ history.visibility.states.hidden == null ? 0 : history.visibility.states.hidden }}</i>
               </span>
             </a></li>
             <li><a href="#">
+              <span class="fa-stack-1x">
                 <i id="totem" class="fa fa-linux fa-2x"></i>
             </a></li>
-            <li><a href="#" ng-controller="TotemCtrl as totem"></a>{{ totem.isAdmin }}</li>
+            <li><a href="#" ng-controller="TotemCtrl as totem"></a>{{ totem.isAdmin == null }}</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -45,11 +46,6 @@
 
     <div id="content" class="container" ng-controller="HistoryCtrl as history">
       <div class="history">
-        <div class="row-fluid">
-          <h4 class="col-xs-12">File History {{ history.visibility.states }}</h4>
-          <notify-error></notify-error>
-        </div><!-- /row -->
-
         <div class="row-fluid">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
@@ -80,6 +76,7 @@
             ... aucun historique... mais que fait le prof !
           </div>
         </div>
+
       </div><!-- / -->
     </div><!-- /container -->
 
