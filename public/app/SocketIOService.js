@@ -9,9 +9,9 @@ angular.module('FileSync')
 			console.log('connected'); // @todo display it on screen using a notifier
 		});
 
-		socket.on('file:changed', function (filename, timestamp, content) {
+		socket.on('file:changed', function (filename, timestamp, content, filepath) {
 			$timeout(function () {
-				_onFileChanged(filename, timestamp, content);
+				_onFileChanged(filename, timestamp, content, filepath);
 			});
 		});
 
@@ -37,6 +37,10 @@ angular.module('FileSync')
 
 			userChangedState: function (state) {
 				socket.emit('user-visibility:changed', state);
+			},
+			
+			merge: function(edit){
+				socket.emit('user-merge', edit);
 			}
 		};
 	}]);
