@@ -31,6 +31,14 @@ angular.module('FileSync')
 				_onFileChanged = f;
 			},
 
+			onChatMessage: function (f) {
+				socket.on('chat:message:new', f);
+			},
+
+			broadcastChatMessage: function (message) {
+				socket.emit('chat:message:new', message);
+			},
+
 			onVisibilityStatesChanged: function (f) {
 				_onVisibilityStatesChanged = f;
 			},
