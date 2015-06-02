@@ -10,7 +10,12 @@ angular.module('FileSync').controller('HistoryCtrl', ['HistoryService','Visibili
 
     this.merge = function (edit) {
       console.log(this.mergePath);
+      if (this.mergePath===undefined){
+        alert("vous devez saisir le chemin pour merger");
+      }
+      else{
       HistoryService.merge(edit,this.mergePath);
+    }
     };
   }
 ]);
