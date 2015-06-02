@@ -83,7 +83,7 @@ body{
 }
 
 .message-content img {
-  max-width: 206px;
+  max-width: 100%;
 }
 
 .message-content button {

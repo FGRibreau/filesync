@@ -8,7 +8,7 @@ angular.module('FileSync').factory('ChatService', function (SocketIOService, _) 
       var regex_url = /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)/;
 
       if(regex_url.test(text)) {
-        xhr.open('GET', "http://open.iframe.ly/api/oembed?url=" + encodeURIComponent(text) + "&width=206", false);
+        xhr.open('GET', "http://open.iframe.ly/api/oembed?url=" + encodeURIComponent(text), false);
         xhr.send(null);  
         if(xhr.status == 200) {
           var obj = JSON.parse(xhr.responseText);
