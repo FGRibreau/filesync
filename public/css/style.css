@@ -57,3 +57,43 @@
     height: 30px;
     opacity: 1;
 }
+
+.chat {
+  max-height: 100%;
+}
+
+.message {
+  border-bottom: 1px gray solid;
+  margin-bottom: 2px;
+}
+
+.red {
+  color: #cd392f;
+}
+
+.blue {
+  color: #66cccc;
+}
+
+.yellow {
+  color: #ffcc00;
+}
+
+.green {
+  color: #60b436;
+}
+
+.red, .blue, .yellow, .green {
+  font-weight: 600;
+}
+
+#chatConteneur{
+  position:fixed;
+  height:100%;
+}
+
+#messageChatConteneur{
+  height: calc(100% - 100px);
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
