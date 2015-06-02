@@ -37,8 +37,19 @@
             <li><a href="#">
               <span class="fa-stack-1x">
                 <i id="totem" class="fa fa-linux fa-2x"></i>
+              </span>
             </a></li>
-            <li><a href="#" ng-controller="TotemCtrl as totem"></a>{{ totem.isAdmin == null }}</li>
+            <li><a href="#" ng-controller="TotemCtrl as totem">
+              <span class="fa-stack-1x" ng-show="{{ totem.totemService.isAdmin }}">
+                <i id="refresh" class="fa fa-refresh fa-2x"></i>
+              </span>
+            </a></li>
+            <li><a href="#" ng-controller="TotemCtrl as totem" ng-click="totem.changeTotemOwner()">
+              <span class="fa-stack-1x">
+                <i id="refresh" class="fa fa-bug fa-2x"></i>
+                <i>{{ totem.isAdmin }}</i>
+              </span>
+            </a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -90,10 +101,12 @@
   <script src="/components/visibilityjs/lib/visibility.core.js" type="text/javascript"></script>
   <script src="/socket.io/socket.io.js" type="text/javascript"></script>
   <script src="/app/app.js" type="text/javascript"></script>
-  <script src="/app/HistoryCtrl.js" type="text/javascript"></script>
-  <script src="/app/HistoryService.js" type="text/javascript"></script>
-  <script src="/app/SocketIOService.js" type="text/javascript"></script>
-  <script src="/app/VisibilityService.js" type="text/javascript"></script>
-  <script src="/app/TotemCtrl.js" type="text/javascript"></script>
+  <script src="/app/History/HistoryCtrl.js" type="text/javascript"></script>
+  <script src="/app/History/HistoryService.js" type="text/javascript"></script>
+  <script src="/app/SocketIO/SocketIOService.js" type="text/javascript"></script>
+  <script src="/app/Visibility/VisibilityService.js" type="text/javascript"></script>
+  <script src="/app/Totem/TotemCtrl.js" type="text/javascript"></script>
+  <script src="/app/Totem/TotemService.js" type="text/javascript"></script>
+  <script src="/app/Totem/TotemDirective.js" type="text/javascript"></script>
   </body>
 </html>

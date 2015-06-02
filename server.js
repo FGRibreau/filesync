@@ -24,6 +24,9 @@ var sio = io(server);
 sio.set('authorization', function (handshakeData, accept) {
   // @todo use something else than a private `query`
   handshakeData.isAdmin = handshakeData._query.access_token === config.auth.token;
+  logger.info("Token equality " + handshakeData._query.access_token === config.auth.token);
+  logger.info("Given token " + handshakeData._query.access_token);
+  logger.info("Expected token " + config.auth.token);
   accept(null, true);
 });
 
@@ -47,11 +50,49 @@ sio.on('connection', function (socket) {
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
 
+  var adminSocket;
   socket.on('amIAdmin', function(f){
-    f(socket.conn.request.isAdmin);
+      f(socket.conn.request.isAdmin);
+
+      if (socket.conn.request.isAdmin){
+        adminSocket = socket.id;
+        logger.info("Admin socket : " + adminSocket);
+      }
+    });
+
+  var currentTotemOwner;
+  socket.on('changeTotemOwner', function(){
+    logger.info("Change totem owner request");
+
+   //if (socket.conn.request.isAdmin){
+        var users = Object.keys(sio.engine.clients);
+        removeElement(users, adminSocket);
+        removeElement(users, currentTotemOwner);
+
+        var currentTotemOwner = users[Math.floor(Math.random() * users.length)];
+
+        logger.info(currentTotemOwner);
+        
+        var object = {
+          owner: currentTotemOwner, 
+          isMe: currentTotemOwner == socket.id
+        
+        }
+        sio.emit('totemOwnerChanged', object);
+    //}
   });
-  });
+});
 
 function getVisibilityCounts() {
   return _.chain(sio.sockets.sockets).values().countBy('visibility').value();
+}
+
+function removeElement(array, element){
+  var index = array.indexOf(element);
+
+  if (index > -1){
+    array.splice(index, 1);
+  }
+
+  return array;
 }

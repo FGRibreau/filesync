@@ -40,7 +40,11 @@ angular.module('FileSync')
 			},
 
 			changeTotemOwner: function(f){
-				socket.emit('changeTotemOwner', f)
+				socket.emit('changeTotemOwner', f);
+			},
+
+			onTotemOwnerChanged: function(f){
+				socket.on('totemOwnerChanged', f);
 			},
 
 			userChangedState: function (state) {
