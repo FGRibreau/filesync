@@ -5,7 +5,7 @@
 
 #messageChatConteneur{
   height: calc(100% - 200px);
-  overflow-y:scroll;
+  overflow-y:auto;
   overflow-x:hidden;
 }
 
@@ -15,15 +15,15 @@
 }
 
 #formWizz{
-	height: 30px;
-	bottom: 0;
+  height: 30px;
+  bottom: 0;
 }
 
 .wizz{
-	 animation-name: wizzaction;
+   animation-name: wizzaction;
     animation-duration: 0.25s;
-	animation-iteration-count: 4;
-	animation-timing-function: linear;
+  animation-iteration-count: 4;
+  animation-timing-function: linear;
 }
 
 @keyframes wizzaction {

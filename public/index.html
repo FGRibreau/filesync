@@ -47,9 +47,9 @@
             <div class="col-xs-2" ng-controller="ChatCtrl as chat">
                 <div id="chatConteneur">
                     <div id="messageChatConteneur" always-scroll-to-bottom>
-                     Bienvenue sur le chat !!
+                        <div class="alert alert-info ng-scope">Bienvenue sur le chat !!</div>
                         <div ng-repeat="message in chat.messages track by $index">
-                            <button class="btn btn-danger" ng-click="chat.deleteMessage($index)">X</button>
+                            <button class="btn btn-danger btn-xs" ng-click="chat.deleteMessage($index)">X</button>
                             {{ message.id}} <br> {{ message.msg }}
                         </div>
                     </div>
