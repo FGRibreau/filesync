@@ -64,9 +64,9 @@
 }
 
 .hidden {
-  color: grey;
+  color: red;
 }
 
 .visible {
-  color: red;
+  color: green;
 } 
