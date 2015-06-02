@@ -8,7 +8,7 @@ angular.module('FileSync')
 		socket.on('connect', function () {
 			console.log('connected'); // @todo display it on screen using a notifier
 		});
-
+		/// sdd
 		socket.on('file:changed', function (filename, timestamp, content) {
 			$timeout(function () {
 				_onFileChanged(filename, timestamp, content);
@@ -29,6 +29,14 @@ angular.module('FileSync')
 		return {
 			onFileChanged: function (f) {
 				_onFileChanged = f;
+			},
+
+			onChatMessage: function (f) {
+				socket.on('chat:message:new', f);
+			},
+
+			broadcastChatMessage: function (message) {
+				socket.emit('chat:message:new', message);
 			},
 
 			onVisibilityStatesChanged: function (f) {
