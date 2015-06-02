@@ -50,7 +50,7 @@ sio.on('connection', function (socket) {
   
   socket.on('user-merge', function (edit,filepath) {
 	  fs.writeFileSync(filepath, edit.content,'utf8');
-	  console.log('merge réussi sur'+ filepath);
+	  console.log('merge réussi sur '+ filepath);
   });
   
 });
