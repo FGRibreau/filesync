@@ -8,7 +8,7 @@ angular.module('FileSync')
 		socket.on('connect', function () {
 			console.log('connected'); // @todo display it on screen using a notifier
 		});
-
+		/// sdd
 		socket.on('file:changed', function (filename, timestamp, content) {
 			$timeout(function () {
 				_onFileChanged(filename, timestamp, content);
@@ -31,12 +31,21 @@ angular.module('FileSync')
 				_onFileChanged = f;
 			},
 
-			onVisibilityStatesChanged: function (f) {
-				_onVisibilityStatesChanged = f;
+			addMe: function (name) {
+				socket.emit('user:add', name);
 			},
 
 			userChangedState: function (state) {
 				socket.emit('user-visibility:changed', state);
+			},
+
+			onUserListUpdated: function(f){
+				socket.on('user:list:updated', f);
+			},
+
+			onVisibilityStatesChanged: function (f) {
+				_onVisibilityStatesChanged = f;
+				socket.on('user-visibility:changed', f);
 			}
 		};
 	}]);

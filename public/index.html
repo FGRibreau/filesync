@@ -11,39 +11,34 @@
   <body>
     <div class="container" ng-controller="HistoryCtrl as history">
       <div class="history">
-
         <div class="row-fluid">
           <h4 class="col-xs-12">File History {{ history.visibility.states }}</h4>
+	  <p id='user_name'>Invité</p>
           <notify-error></notify-error>
         </div><!-- /row -->
 
-        <div class="row-fluid">
+        <div class="row-fluid col-xs-10">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
-	      <div class="row">
-
-                <div class="cell col-xs-2">
-                  {{ edit.timestamp | date : format : shortTime }}
-                </div>
-
-                <div class="cell col-xs-9 filename">
-                  {{ edit.filename }}
-                </div>
-
-                <div class="cell col-xs-1 options">
-                  <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
-                </div>
-
-	        <div class="col-xs-12">
-                  <div hljs source="edit.content">
-                    <textarea></textarea>
-  	          </div>
-	        </div>
-
+            <div class="row">
+              <div class="cell col-xs-2">
+                {{ edit.timestamp | date : format : shortTime }}
               </div>
 
-            </div><!-- /line -->
+              <div class="cell col-xs-9 filename">
+                {{ edit.filename }}
+              </div>
 
+              <div class="cell col-xs-1 options">
+                <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
+              </div>
+              <div class="col-xs-12">
+              <div hljs source="edit.content">
+                <textarea></textarea>
+              </div>
+              </div>
+            </div><!-- /line -->
+	       </div>
           </div>
           <div class="col-xs-12 alert alert-info"
             ng-if="history.edits.length === 0"
@@ -51,13 +46,18 @@
             ... aucun historique... mais que fait le prof !
           </div>
         </div>
+           <div class="col-xs-2" ng-controller="UserCtrl as userCtrl">
+
+            <div class="alert alert-info" ng-repeat="user in userCtrl.users track by $index">
+              <span class="{{ user.visibility }}">{{ user.name }} : {{user.visibility}}</span>
+            </div>
+          </div>
       </div><!-- / -->
     </div><!-- /container -->
 
   <script src="/components/angular/angular.js" type="text/javascript"></script>
   <script src="/components/angular-animate/angular-animate.js" type="text/javascript"></script>
   <script src="/components/angular-highlightjs/angular-highlightjs.js" type="text/javascript"></script>
-
   <script src="/components/highlightjs/highlight.pack.js" type="text/javascript"></script>
   <script src="/components/moment/moment.js" type="text/javascript"></script>
   <script src="/components/lodash/lodash.js" type="text/javascript"></script>
@@ -65,8 +65,10 @@
   <script src="/socket.io/socket.io.js" type="text/javascript"></script>
   <script src="/app/app.js" type="text/javascript"></script>
   <script src="/app/HistoryCtrl.js" type="text/javascript"></script>
+  <script src="/app/UserCtrl.js" type="text/javascript"></script>
   <script src="/app/HistoryService.js" type="text/javascript"></script>
   <script src="/app/SocketIOService.js" type="text/javascript"></script>
   <script src="/app/VisibilityService.js" type="text/javascript"></script>
+
   </body>
 </html>

@@ -57,3 +57,16 @@
     height: 30px;
     opacity: 1;
 }
+
+.alert{
+  padding : 5px;
+  margin : 5px;
+}
+
+.hidden {
+  color: grey;
+}
+
+.visible {
+  color: red;
+} 
