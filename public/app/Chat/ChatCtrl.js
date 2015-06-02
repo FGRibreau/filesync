@@ -10,6 +10,7 @@ angular.module('FileSync')
 
     SocketIOService.onChatMessage(function (userid, message) {
       $scope.$apply();
+      this.message = "";
       $scope.$emit('reload');
       $scope.$emit('submit');
     }.bind(this));
