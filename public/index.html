@@ -45,168 +45,172 @@
             </div>
 
             <div class="col-xs-2" ng-controller="ChatCtrl as chat">
-                <div ng-repeat="message in chat.messages track by $index">
-                    {{message}}
+                <div id="chatConteneur">
+                    <div id="messageChatConteneur" always-scroll-to-bottom>
+                     Bienvenue sur le chat !!
+                        <div ng-repeat="message in chat.messages track by $index">
+                            <button class="btn btn-danger" ng-click="chat.deleteMessage($index)">X</button>
+                            {{ message.id}} <br> {{ message.msg }}
+                        </div>
+                    </div>
+                    <form ng-submit="chat.sendMessage(chat.message)">
+                        <input type="text" ng-model="chat.message" />
+                    </form>
+                    <table>
+                        <tr>
+                            <td>
+                                <form ng-submit="chat.sendSound('Cloche')">
+                                    <audio id="audioCloche"></audio>
+                                    <input type="hidden" id="audioFileCloche" value="../sound/cloche.mp3" />
+                                    <button>
+                                        <img src="../img/cloche.png" alt="cloche" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Horloge')">
+                                    <audio id="audioHorloge"></audio>
+                                    <input type="hidden" id="audioFileHorloge" value="../sound/horloge.mp3" />
+                                    <button>
+                                        <img src="../img/horloge.png" alt="horloge" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Photo')">
+                                    <audio id="audioPhoto"></audio>
+                                    <input type="hidden" id="audioFilePhoto" value="../sound/photo.mp3" />
+                                    <button>
+                                        <img src="../img/photo.png" alt="photo" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Tambour')">
+                                    <audio id="audioTambour"></audio>
+                                    <input type="hidden" id="audioFileTambour" value="../sound/tambour.mp3" />
+                                    <button>
+                                        <img src="../img/tambour.png" alt="tambour" />
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form ng-submit="chat.sendSound('Tire')">
+                                    <audio id="audioTire"></audio>
+                                    <input type="hidden" id="audioFileTire" value="../sound/tire.mp3" />
+                                    <button>
+                                        <img src="../img/tire.png" alt="tire" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Toilette')">
+                                    <audio id="audioToilette"></audio>
+                                    <input type="hidden" id="audioFileToilette" value="../sound/toilette.mp3" />
+                                    <button>
+                                        <img src="../img/toilette.png" alt="toilette" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Train')">
+                                    <audio id="audioTrain"></audio>
+                                    <input type="hidden" id="audioFileTrain" value="../sound/train.mp3" />
+                                    <button>
+                                        <img src="../img/train.png" alt="train" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Urgent')">
+                                    <audio id="audioUrgent"></audio>
+                                    <input type="hidden" id="audioFileUrgent" value="../sound/urgent.mp3" />
+                                    <button>
+                                        <img src="../img/urgent.png" alt="urgent" />
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form ng-submit="chat.sendSound('Cochon')">
+                                    <audio id="audioCochon"></audio>
+                                    <input type="hidden" id="audioFileCochon" value="../sound/cochon.mp3" />
+                                    <button>
+                                        <img src="../img/cochon.png" alt="cochon" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Vache')">
+                                    <audio id="audioVache"></audio>
+                                    <input type="hidden" id="audioFileVache" value="../sound/Vache.mp3" />
+                                    <button>
+                                        <img src="../img/Vache.png" alt="Vache" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Canard')">
+                                    <audio id="audioCanard"></audio>
+                                    <input type="hidden" id="audioFileCanard" value="../sound/Canard.mp3" />
+                                    <button>
+                                        <img src="../img/Canard.png" alt="Canard" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Chat')">
+                                    <audio id="audioChat"></audio>
+                                    <input type="hidden" id="audioFileChat" value="../sound/Chat.mp3" />
+                                    <button>
+                                        <img src="../img/Chat.png" alt="Chat" />
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form ng-submit="chat.sendSound('Cheval')">
+                                    <audio id="audioCheval"></audio>
+                                    <input type="hidden" id="audioFileCheval" value="../sound/Cheval.mp3" />
+                                    <button>
+                                        <img src="../img/Cheval.png" alt="Cheval" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Chien')">
+                                    <audio id="audioChien"></audio>
+                                    <input type="hidden" id="audioFileChien" value="../sound/Chien.mp3" />
+                                    <button>
+                                        <img src="../img/Chien.png" alt="Chien" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Coq')">
+                                    <audio id="audioCoq"></audio>
+                                    <input type="hidden" id="audioFileCoq" value="../sound/Coq.mp3" />
+                                    <button>
+                                        <img src="../img/Coq.png" alt="Coq" />
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form ng-submit="chat.sendSound('Mouton')">
+                                    <audio id="audioMouton"></audio>
+                                    <input type="hidden" id="audioFileMouton" value="../sound/Mouton.mp3" />
+                                    <button>
+                                        <img src="../img/Mouton.png" alt="Mouton" />
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <form ng-submit="chat.sendMessage()">
-                    <input type="text" ng-model="chat.message" />
-                    <!--<button type="submit" ng-model="chat.message" name="1">1</button>-->
-                </form>
-                <form ng-submit="chat.sendSound('Son : Chat')"></form>
-                <table>
-                    <tr>
-                        <td>
-                            <form ng-submit="chat.sendSound('Cloche')">
-                                <audio id="audioCloche"></audio>
-                                <input type="hidden" id="audioFileCloche" value="../sound/cloche.mp3" />
-                                <button>
-                                    <img src="../img/cloche.png" alt="cloche" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Horloge')">
-                                <audio id="audioHorloge"></audio>
-                                <input type="hidden" id="audioFileHorloge" value="../sound/horloge.mp3" />
-                                <button>
-                                    <img src="../img/horloge.png" alt="horloge" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Photo')">
-                                <audio id="audioPhoto"></audio>
-                                <input type="hidden" id="audioFilePhoto" value="../sound/photo.mp3" />
-                                <button>
-                                    <img src="../img/photo.png" alt="photo" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Tambour')">
-                                <audio id="audioTambour"></audio>
-                                <input type="hidden" id="audioFileTambour" value="../sound/tambour.mp3" />
-                                <button>
-                                    <img src="../img/tambour.png" alt="tambour" />
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form ng-submit="chat.sendSound('Tire')">
-                                <audio id="audioTire"></audio>
-                                <input type="hidden" id="audioFileTire" value="../sound/tire.mp3" />
-                                <button>
-                                    <img src="../img/tire.png" alt="tire" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Toilette')">
-                                <audio id="audioToilette"></audio>
-                                <input type="hidden" id="audioFileToilette" value="../sound/toilette.mp3" />
-                                <button>
-                                    <img src="../img/toilette.png" alt="toilette" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Train')">
-                                <audio id="audioTrain"></audio>
-                                <input type="hidden" id="audioFileTrain" value="../sound/train.mp3" />
-                                <button>
-                                    <img src="../img/train.png" alt="train" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Urgent')">
-                                <audio id="audioUrgent"></audio>
-                                <input type="hidden" id="audioFileUrgent" value="../sound/urgent.mp3" />
-                                <button>
-                                    <img src="../img/urgent.png" alt="urgent" />
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form ng-submit="chat.sendSound('Cochon')">
-                                <audio id="audioCochon"></audio>
-                                <input type="hidden" id="audioFileCochon" value="../sound/cochon.mp3" />
-                                <button>
-                                    <img src="../img/cochon.png" alt="cochon" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Vache')">
-                                <audio id="audioVache"></audio>
-                                <input type="hidden" id="audioFileVache" value="../sound/Vache.mp3" />
-                                <button>
-                                    <img src="../img/Vache.png" alt="Vache" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Canard')">
-                                <audio id="audioCanard"></audio>
-                                <input type="hidden" id="audioFileCanard" value="../sound/Canard.mp3" />
-                                <button>
-                                    <img src="../img/Canard.png" alt="Canard" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Chat')">
-                                <audio id="audioChat"></audio>
-                                <input type="hidden" id="audioFileChat" value="../sound/Chat.mp3" />
-                                <button>
-                                    <img src="../img/Chat.png" alt="Chat" />
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form ng-submit="chat.sendSound('Cheval')">
-                                <audio id="audioCheval"></audio>
-                                <input type="hidden" id="audioFileCheval" value="../sound/Cheval.mp3" />
-                                <button>
-                                    <img src="../img/Cheval.png" alt="Cheval" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Chien')">
-                                <audio id="audioChien"></audio>
-                                <input type="hidden" id="audioFileChien" value="../sound/Chien.mp3" />
-                                <button>
-                                    <img src="../img/Chien.png" alt="Chien" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Coq')">
-                                <audio id="audioCoq"></audio>
-                                <input type="hidden" id="audioFileCoq" value="../sound/Coq.mp3" />
-                                <button>
-                                    <img src="../img/Coq.png" alt="Coq" />
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form ng-submit="chat.sendSound('Mouton')">
-                                <audio id="audioMouton"></audio>
-                                <input type="hidden" id="audioFileMouton" value="../sound/Mouton.mp3" />
-                                <button>
-                                    <img src="../img/Mouton.png" alt="Mouton" />
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
             </div>
         </div>
         <!-- / -->
@@ -221,11 +225,14 @@
     <script src="/components/visibilityjs/lib/visibility.core.js" type="text/javascript"></script>
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>
     <script src="/app/app.js" type="text/javascript"></script>
-    <script src="/app/HistoryCtrl.js" type="text/javascript"></script>
-    <script src="/app/ChatCtrl.js" type="text/javascript"></script>
-    <script src="/app/HistoryService.js" type="text/javascript"></script>
-    <script src="/app/SocketIOService.js" type="text/javascript"></script>
-    <script src="/app/VisibilityService.js" type="text/javascript"></script>
+    <script src="/app/Chat/ChatCtrl.js" type="text/javascript"></script>
+    <script src="/app/Chat/ChatService.js" type="text/javascript"></script>
+    <script src="/app/Chat/alwaysScrollToBottom.js" type="text/javascript"></script>
+    <script src="/app/Chat/History/ChatHistoryService.js" type="text/javascript"></script>
+    <script src="/app/File/HistoryCtrl.js" type="text/javascript"></script>
+    <script src="/app/File/HistoryService.js" type="text/javascript"></script>
+    <script src="/app/SocketIO/SocketIOService.js" type="text/javascript"></script>
+    <script src="/app/Visibility/VisibilityService.js" type="text/javascript"></script>
 </body>
 
 </html>

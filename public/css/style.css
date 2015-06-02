@@ -1,3 +1,42 @@
+#chatConteneur{
+  position:fixed;
+  height:100%;
+}
+
+#messageChatConteneur{
+  height: calc(100% - 200px);
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+
+#formText{
+	height: 30px;
+	padding-bottom : 10px;
+}
+
+#formWizz{
+	height: 30px;
+	bottom: 0;
+}
+
+.wizz{
+	 animation-name: wizzaction;
+    animation-duration: 0.25s;
+	animation-iteration-count: 4;
+	animation-timing-function: linear;
+}
+
+@keyframes wizzaction {
+    0%   {transform: rotate(0deg);}
+    25%  {transform: rotate(7deg);}
+    75%  {transform: rotate(-7deg);}
+    100% {transform: rotate(0deg);}
+}
+
+body{
+	height:100%;
+}
+
 .row-fluid{
   clear: both;
 }

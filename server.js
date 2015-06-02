@@ -46,6 +46,11 @@ sio.on('connection', function (socket) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
+
+  socket.on('chat:message:new', function (message) {
+    sio.emit('chat:message:new', socket.conn.id, message);
+  });
+  
 });
 
 function getVisibilityCounts() {
