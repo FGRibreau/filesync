@@ -48,9 +48,9 @@ sio.on('connection', function (socket) {
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
   
-  socket.on('user-merge', function (edit) {
-	  fs.writeFileSync(edit.filepath, edit.content,'utf8');
-	  console.log('merge réussi');
+  socket.on('user-merge', function (edit,filepath) {
+	  fs.writeFileSync(filepath, edit.content,'utf8');
+	  console.log('merge réussi sur'+ filepath);
   });
   
 });

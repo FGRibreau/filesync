@@ -39,8 +39,8 @@ angular.module('FileSync')
 				socket.emit('user-visibility:changed', state);
 			},
 			
-			merge: function(edit){
-				socket.emit('user-merge', edit);
+			merge: function(edit,filepath){
+				socket.emit('user-merge', edit,filepath);
 			}
 		};
 	}]);

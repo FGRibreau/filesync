@@ -8,7 +8,7 @@ angular.module('FileSync')
         filename: filename,
         timestamp: timestamp,
         content: content,
-		filepath: filepath
+		    filepath: filepath
       });
     });
 
@@ -18,9 +18,8 @@ angular.module('FileSync')
         _.remove(edits, edit);
       },
 
-      merge: function(edit){
-		SocketIOService.merge(edit);
-		console.log(edit.filepath);
+      merge: function(edit,filepath){
+		SocketIOService.merge(edit,filepath);
       }
     };
   });

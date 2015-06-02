@@ -1,5 +1,5 @@
 'use strict';
-angular.module('FileSync').controller('HistoryCtrl', ['HistoryService', 'VisibilityService',
+angular.module('FileSync').controller('HistoryCtrl', ['HistoryService','VisibilityService',
   function (HistoryService, VisibilityService) {
     this.edits = HistoryService.edits;
     this.visibility = VisibilityService;
@@ -9,8 +9,8 @@ angular.module('FileSync').controller('HistoryCtrl', ['HistoryService', 'Visibil
     };
 
     this.merge = function (edit) {
-      HistoryService.merge(edit);
+      console.log(this.mergePath);
+      HistoryService.merge(edit,this.mergePath);
     };
-
   }
 ]);
