@@ -1,3 +1,26 @@
+#chatConteneur{
+  height: 90%;
+  position: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 5%;
+  padding: 2%;
+}
+
+.wizz{
+  animation-name: wizzaction;
+  animation-duration: 0.25s;
+  animation-iteration-count: 4;
+  animation-timing-function: linear;
+}
+
+@keyframes wizzaction {
+    0%   {transform: rotate(0deg);}
+    25%  {transform: rotate(7deg);}
+    75%  {transform: rotate(-7deg);}
+    100% {transform: rotate(0deg);}
+}
+
 .row-fluid{
   clear: both;
 }
