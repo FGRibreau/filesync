@@ -9,7 +9,7 @@ angular.module('FileSync')
         timestamp: timestamp,
         content: content
       });
-      NotificationService.notifyInfos(filename,timestamp);
+      NotificationService.notifyModif(filename,timestamp);
     });
 
     return {

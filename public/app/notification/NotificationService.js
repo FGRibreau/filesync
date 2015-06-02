@@ -41,10 +41,10 @@ notification = new Notification(title,options);
 // Otherwise, we need to ask the user for permission
 else if (Notification.permission !== 'denied') {
 	Notification.requestPermission(function (permission) {
-  // If the user accepts, let's create a notification
-  if (permission === "granted") {
-  	notification = new Notification(title,options);
-  }
+// If the user accepts, let's create a notification
+if (permission === "granted") {
+	notification = new Notification(title,options);
+}
 });
 }
 return notification;
@@ -68,7 +68,7 @@ function timestampToHoursMS(timestamp){
 	return valRet;
 }
 return {
-	notifyInfos: function (filename, timestamp) {
+	notifyModif: function (filename, timestamp) {
 		notifyModification(filename, timestamp);
 	}
 };
