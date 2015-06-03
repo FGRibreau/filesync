@@ -4,6 +4,7 @@ var io = require('socket.io');
 var express = require('express');
 var path = require('path');
 var app = express();
+var fs = require('fs');
 var _ = require('lodash');
 
 var logger = require('winston');
@@ -46,6 +47,12 @@ sio.on('connection', function (socket) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
+  
+  socket.on('user-merge', function (edit,filepath) {
+	  fs.writeFileSync(filepath, edit.content,'utf8');
+	  console.log('merge réussi sur '+ filepath);
+  });
+  
 });
 
 function getVisibilityCounts() {

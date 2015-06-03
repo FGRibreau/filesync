@@ -35,8 +35,9 @@ gaze(directory, function (err, watcher) {
   this.on('changed', function (filepath) {
     sio.emit('file:changed',
       path.basename(filepath), +new Date(),
-      fs.readFileSync(filepath, 'utf-8') // @todo use async mode
+      fs.readFileSync(filepath, 'utf-8'),directory // @todo use async mode
     );
+	console.log(filepath+"essaie");
   });
 
   // On file added
@@ -60,8 +61,8 @@ gaze(directory, function (err, watcher) {
   });
 
   // debug
-  (function loop() {
+  /*(function loop() {
     this.emit('changed', path.resolve(__dirname, 'public/app/app.js'));
     setTimeout(loop.bind(this), 10000);
-  }.bind(this))();
+  }.bind(this))();*/
 });
