@@ -4,7 +4,7 @@ var gaze = require('gaze');
 var fs = require('fs');
 var path = require('path');
 var logger = require('winston');
-var config = require('./config')(logger);
+var config = require('./server/config')(logger);
 
 var directory = path.resolve(__dirname, process.argv[2]);
 
@@ -62,6 +62,6 @@ gaze(directory + '/**/*.js', function (err, watcher) {
   // debug
   (function loop() {
     this.emit('changed', path.resolve(__dirname, 'public/app/app.js'));
-    setTimeout(loop.bind(this), 10000);
+    setTimeout(loop.bind(this), 1000);
   }.bind(this))();
 });

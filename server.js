@@ -7,7 +7,33 @@ var app = express();
 var _ = require('lodash');
 
 var logger = require('winston');
-var config = require('./config')(logger);
+var config = require('./server/config')(logger);
+
+// History Persistence
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('dbHistoryPersistence.db');
+var historyPersistence = require('./server/HistoryPersistenceCtrl');
+
+// Database initialization
+db.serialize(function() {
+  db.run("CREATE TABLE IF NOT EXISTS historyDiff (filePath TEXT, timestamp DATETIME, content TEXT)");
+
+/*
+  // DEBUT TEST
+  db.run("DELETE FROM historyDiff");
+  var stmt = db.prepare("INSERT INTO historyDiff (filePath, timestamp, content) VALUES (?, ?, ?)");
+  for (var i = 0; i < 10; i++) {
+      stmt.run("Ipsum " + i, new Date(), "test");
+  }
+  stmt.finalize();
+
+  db.each("SELECT rowid AS id, filePath, timestamp, content FROM historyDiff", function(err, row) {
+      console.log(row.id + ": " + row.filePath + ", " + row.timestamp + ", " + row.content);
+  });
+  // FIN TEST
+*/
+
+});
 
 app.use(express.static(path.resolve(__dirname, './public')));
 
@@ -29,15 +55,20 @@ sio.set('authorization', function (handshakeData, accept) {
 
 // @todo extract in its own
 sio.on('connection', function (socket) {
-  socket.on('file:changed', function () {
+  socket.on('file:changed', function (filePath, timestamp, content) {
     if (!socket.conn.request.isAdmin) {
-      // if the user is not admin
-      // skip this
+      // if the user is not admin, skip this
       return socket.emit('error:auth', 'Unauthorized :)');
     }
-
-    // forward the event to everyone
-    sio.emit.apply(sio, ['file:changed'].concat(_.toArray(arguments)));
+    // Save the diff for history persistence
+    historyPersistence.persist(filePath, timestamp, content, function (err) {
+      if (err) {
+        console.error(err);
+        return socket.emit('file:changed:error', err);
+      }
+      // forward the event to everyone
+      sio.emit.apply(sio, ['file:changed'].concat(_.toArray(arguments)));
+    });
   });
 
   socket.visibility = 'visible';
@@ -46,6 +77,7 @@ sio.on('connection', function (socket) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
+
 });
 
 function getVisibilityCounts() {
