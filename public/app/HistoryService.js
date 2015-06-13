@@ -1,6 +1,6 @@
 'use strict';
 angular.module('FileSync')
-  .factory('HistoryService', function (SocketIOService, _) {
+  .factory('HistoryService', function (SocketIOService, _, NotificationService) {
     var edits = [];
 
     SocketIOService.onFileChanged(function (filename, timestamp, content) {
@@ -9,6 +9,7 @@ angular.module('FileSync')
         timestamp: timestamp,
         content: content
       });
+      NotificationService.notifyModif(filename,timestamp);
     });
 
     return {
@@ -18,3 +19,4 @@ angular.module('FileSync')
       }
     };
   });
+

@@ -20,7 +20,7 @@
         <div class="row-fluid">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
-	      <div class="row">
+	      <div class="row" id="{{ edit.filename + edit.timestamp }}">
 
                 <div class="cell col-xs-2">
                   {{ edit.timestamp | date : format : shortTime }}
@@ -68,5 +68,7 @@
   <script src="/app/HistoryService.js" type="text/javascript"></script>
   <script src="/app/SocketIOService.js" type="text/javascript"></script>
   <script src="/app/VisibilityService.js" type="text/javascript"></script>
+    <script src="/app/notification/NotificationCtrl.js" type="text/javascript"></script>
+      <script src="/app/notification/NotificationService.js" type="text/javascript"></script>
   </body>
 </html>
