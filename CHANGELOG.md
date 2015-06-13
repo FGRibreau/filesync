@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.1.0](https://github.com/fgribreau/filesync/tree/v2.1.0) (2015-06-13)
+
+[Full Changelog](https://github.com/fgribreau/filesync/compare/v2.0.1...v2.1.0)
+
+**Closed issues:**
+
+- Impossible installation on Windows 8 [\#26](https://github.com/FGRibreau/filesync/issues/26)
+
 ## [v2.0.1](https://github.com/fgribreau/filesync/tree/v2.0.1) (2015-06-13)
 
 [Full Changelog](https://github.com/fgribreau/filesync/compare/v2.0.0...v2.0.1)
