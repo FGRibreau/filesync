@@ -33,6 +33,8 @@ filesync-server
 filesync-relay /path/to/directory
 ```
 
+## [Changelog](/CHANGELOG.md)
+
 ## Contribute / TODO
 
 See [issues](https://github.com/FGRibreau/filesync/issues) there is still a lot of things to do/improve note that **I will happily merge any pull-requests that solve each of the specified issues**.
