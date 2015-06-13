@@ -42,6 +42,34 @@ sio.on('connection', function (socket) {
 
   socket.visibility = 'visible';
 
+  socket.on('amIAdmin', function(f){
+    f(socket.conn.request.isAdmin);
+  });
+
+  socket.on('players:got', function(f){
+    f(Object.keys(sio.engine.clients));
+  });
+
+  socket.on('question:ended', function(){
+    sio.emit('question:ended');
+  });
+
+  socket.on('user-answer:sent', function(answer){
+    sio.emit('user-answer:sent', answer, socket.id);
+  });
+
+  socket.on('admin-question:added', function(question){
+    sio.emit('admin-question:added', question);
+  });
+
+  socket.on('admin-possibleAnswer:added', function(possibleAnswer){
+    sio.emit('admin-possibleAnswer:added', possibleAnswer);
+  });
+
+  socket.on('admin-trueAnswer:added', function(trueAnswer){
+    sio.emit('admin-trueAnswer:added', trueAnswer);
+  });
+  
   socket.on('user-visibility:changed', function (state) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
