@@ -4,7 +4,7 @@
   "description": "[WorkInProgress - ProofOfConcept] Unidirectional 1-N file syncing with history and local merging",
   "scripts": {
     "start": "./bin/filesync",
-    "postinstall": "bower install"
+    "postinstall": "./node_modules/.bin/bower install"
   },
   "bin": {
     "filesync-relay": "./bin/filesync-relay",
