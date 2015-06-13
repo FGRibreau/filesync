@@ -57,3 +57,56 @@
     height: 30px;
     opacity: 1;
 }
+
+body{
+  height:100%;
+}
+
+#divMessages {
+  overflow-y: auto;
+  height:calc(100% - 24px);
+  width: 100%;
+}
+
+.message {
+  width: 100%;
+}
+
+.message-content {
+  position: relative;
+  width: 100%;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+}
+
+.message-content img {
+  max-width: 100%;
+}
+
+.message-content button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100000;
+}
+
+#inputMessage {
+  width: 100%;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+#divInputMessage {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+#divChat {
+  position:fixed;
+  width: inherit;
+  height:calc(100% - 100px);
+}

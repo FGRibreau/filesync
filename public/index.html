@@ -18,39 +18,61 @@
         </div><!-- /row -->
 
         <div class="row-fluid">
-          <div ng-repeat="edit in history.edits" class="animate">
-            <div class="line well ng-cloak">
-	      <div class="row">
+          <div id="divHistory" class="col-xs-9">
+            <div ng-repeat="edit in history.edits" class="animate">
+              <div class="line well ng-cloak">
+                <div class="row">
+                  <div class="cell col-xs-2">
+                    {{ edit.timestamp | date : format : shortTime }}
+                  </div>
 
-                <div class="cell col-xs-2">
-                  {{ edit.timestamp | date : format : shortTime }}
+                  <div class="cell col-xs-9 filename">
+                    {{ edit.filename }}
+                  </div>
+
+                  <div class="cell col-xs-1 options">
+                    <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
+                  </div>
+
+                  <div class="col-xs-12">
+                      <div hljs source="edit.content">
+                        <textarea></textarea>
+                      </div>
+                  </div>
+
                 </div>
 
-                <div class="cell col-xs-9 filename">
-                  {{ edit.filename }}
+              </div><!-- /line -->
+
+            </div>
+            <div class="col-xs-12 alert alert-info"
+              ng-if="history.edits.length === 0"
+              class="animate">
+              ... aucun historique... mais que fait le prof !
+            </div>
+          </div>
+
+          <div class="col-xs-3" ng-controller="ChatCtrl as chat">
+            <div id="divChat">
+              <div id="divMessages">
+                <div class="message" ng-repeat="message in chat.messages track by $index">
+                  {{ message.author }} - {{ message.timestamp }}
+                  <div class="message-content alert alert-info">
+                    <button class="" ng-click="chat.deleteMessage($index)">x</button>
+                    <div ng-bind-html="chat.formatMessage(message.content)">
+                      
+                    </div>
+                  </div>
                 </div>
-
-                <div class="cell col-xs-1 options">
-                  <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
-                </div>
-
-	        <div class="col-xs-12">
-                  <div hljs source="edit.content">
-                    <textarea></textarea>
-  	          </div>
-	        </div>
-
               </div>
-
-            </div><!-- /line -->
-
+              <div id="divInputMessage">
+                <form ng-submit="chat.sendMessage()">
+                  <input id="inputMessage" type="text" ng-model="chat.inputValue" placeholder="Tapez votre message ici..."/>
+                </form>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-12 alert alert-info"
-            ng-if="history.edits.length === 0"
-            class="animate">
-            ... aucun historique... mais que fait le prof !
-          </div>
-        </div>
+        </div><!-- /row-fluid -->
       </div><!-- / -->
     </div><!-- /container -->
 
@@ -64,9 +86,11 @@
   <script src="/components/visibilityjs/lib/visibility.core.js" type="text/javascript"></script>
   <script src="/socket.io/socket.io.js" type="text/javascript"></script>
   <script src="/app/app.js" type="text/javascript"></script>
-  <script src="/app/HistoryCtrl.js" type="text/javascript"></script>
-  <script src="/app/HistoryService.js" type="text/javascript"></script>
-  <script src="/app/SocketIOService.js" type="text/javascript"></script>
-  <script src="/app/VisibilityService.js" type="text/javascript"></script>
+  <script src="/app/Files/HistoryCtrl.js" type="text/javascript"></script>
+  <script src="/app/Files/HistoryService.js" type="text/javascript"></script>
+  <script src="/app/Chat/ChatCtrl.js" type="text/javascript"></script>
+  <script src="/app/Chat/ChatService.js" type="text/javascript"></script>
+  <script src="/app/Communication/SocketIOService.js" type="text/javascript"></script>
+  <script src="/app/Visibility/VisibilityService.js" type="text/javascript"></script>
   </body>
 </html>
