@@ -20,7 +20,7 @@
         <div class="row-fluid">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
-	      <div class="row">
+	        <div class="row">
 
                 <div class="cell col-xs-2">
                   {{ edit.timestamp | date : format : shortTime }}
@@ -30,16 +30,42 @@
                   {{ edit.filename }}
                 </div>
 
+
                 <div class="cell col-xs-1 options">
                   <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
                 </div>
 
 	        <div class="col-xs-12">
-                  <div hljs source="edit.content">
+                  <div hljs source="edit.content" ng-if="edit.diffs.length === 0">
                     <textarea></textarea>
-  	          </div>
+                   </div>
+
+                   <table class="table" ng-if="edit.diffs.length != 0">
+                    <caption>Différences des deux fichiers</caption>
+                    <thead> 
+                     <tr>
+                         <th>Fichier distant</th>
+                         <th>Fichier local</th>
+                     </tr>
+                    </thead>
+
+                    <tbody ng-repeat="diff in edit.diffs">
+                      <tr>
+                        <td ng-class="diff.baseClass">{{ diff.baseContent }}</td>
+                        <td ng-class="diff.localClass">{{ diff.localContent }}</td>
+                      </tr>
+                    </tbody>
+                   </table>
+
 	        </div>
 
+             <div class="col-xs-6" ng-controller="DiffCtrl as diff">
+                <form ng-submit="diff.computeDiff(edit)">
+                  <input fileread="diff.localFile" type="file"/>
+                  <input type="submit"/>
+                </form>
+
+              </div>
               </div>
 
             </div><!-- /line -->
@@ -57,7 +83,7 @@
   <script src="/components/angular/angular.js" type="text/javascript"></script>
   <script src="/components/angular-animate/angular-animate.js" type="text/javascript"></script>
   <script src="/components/angular-highlightjs/angular-highlightjs.js" type="text/javascript"></script>
-
+  <script src="/components/difflib.js" type="text/javascript"></script>
   <script src="/components/highlightjs/highlight.pack.js" type="text/javascript"></script>
   <script src="/components/moment/moment.js" type="text/javascript"></script>
   <script src="/components/lodash/lodash.js" type="text/javascript"></script>
@@ -65,8 +91,10 @@
   <script src="/socket.io/socket.io.js" type="text/javascript"></script>
   <script src="/app/app.js" type="text/javascript"></script>
   <script src="/app/HistoryCtrl.js" type="text/javascript"></script>
+  <script src="/app/DiffCtrl.js" type="text/javascript"></script>
   <script src="/app/HistoryService.js" type="text/javascript"></script>
   <script src="/app/SocketIOService.js" type="text/javascript"></script>
   <script src="/app/VisibilityService.js" type="text/javascript"></script>
+
   </body>
 </html>
