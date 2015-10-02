@@ -23,22 +23,22 @@ var sio = io(SOCKET_IO_URL, {
   multiplex: false
 });
 
-sio.on('connect', function () {
+sio.on('connect', function() {
   logger.info('connected!');
 });
 
-gaze(directory, function (err, watcher) {
+gaze(directory, function(err, watcher) {
   if (err) {
     throw err;
   }
 
   // Get all watched files
-  this.watched(function (err, watched) {
+  this.watched(function(err, watched) {
     console.log(watched);
   });
 
   // On file changed
-  this.on('changed', function (filepath) {
+  this.on('changed', function(filepath) {
     sio.emit('file:changed',
       path.basename(filepath),
       Date.now(),
@@ -47,22 +47,22 @@ gaze(directory, function (err, watcher) {
   });
 
   // On file added
-  this.on('added', function (filepath) {
+  this.on('added', function(filepath) {
     console.log(filepath + ' was added');
   });
 
   // On file deleted
-  this.on('deleted', function (filepath) {
+  this.on('deleted', function(filepath) {
     console.log(filepath + ' was deleted');
   });
 
   // On changed/added/deleted
-  this.on('all', function (event, filepath) {
+  this.on('all', function(event, filepath) {
     console.log(filepath + ' was ' + event);
   });
 
   // Get watched files with relative paths
-  this.relative(function (err, files) {
+  this.relative(function(err, files) {
     console.log(files);
   });
 

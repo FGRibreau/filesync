@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <div class="container" ng-controller="SocialCtrl as social">
+      <div ng-repeat="viewer in social.viewers" class="animate">
+        {{ viewer }}
+      </div>
+    </div>
     <div class="container" ng-controller="HistoryCtrl as history">
       <div class="history">
 
@@ -67,6 +72,7 @@
   <script src="/app/HistoryCtrl.js" type="text/javascript"></script>
   <script src="/app/HistoryService.js" type="text/javascript"></script>
   <script src="/app/SocketIOService.js" type="text/javascript"></script>
+  <script src="/app/SocialCtrl.js" type="text/javascript"></script>
   <script src="/app/VisibilityService.js" type="text/javascript"></script>
   </body>
 </html>
