@@ -35,10 +35,10 @@ filesync-relay /path/to/directory
 
 ## How to contribute
 
-1 - [fork the project](https://help.github.com/articles/fork-a-repo/)
-2 - [clone it](https://git-scm.com/docs/git-clone) on your computer
-3 - run `npm install` inside `filesync/`
-4 - Let's do this!
+- [fork the project](https://help.github.com/articles/fork-a-repo/)
+- [clone it](https://git-scm.com/docs/git-clone) on your computer
+- run `npm install` inside `filesync/`
+- Let's do this!
 
 ## [Changelog](/CHANGELOG.md)
 
