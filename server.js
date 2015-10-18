@@ -86,6 +86,12 @@ sio.on('connection', function(socket) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
+
+  socket.on('cmd:typed', function(cmd) {
+    // forward the event to everyone
+    console.log('you just tyoed this : ' + cmd);
+    sio.emit('cmd:typed',cmd);
+  });
 });
 
 function getVisibilityCounts() {
