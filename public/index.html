@@ -15,8 +15,15 @@
       </div>
     </div>
     <div class="container" ng-controller="CmdCtrl as cmdManager">
-      <div ng-repeat="cmd in cmdManager.cmds track by $index" class="animate">
-        {{ cmd }}
+      <h4>Command history</h4>
+      <div class="line well ng-cloak">
+        <div class="row">
+          <div ng-repeat="cmd in cmdManager.cmds track by $index" class="animate">
+            <div class="cell col-xs-9">
+              <p>my-app > {{ cmd }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="container" ng-controller="HistoryCtrl as history">

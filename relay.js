@@ -74,7 +74,6 @@ var rl = readline.createInterface({
   terminal: false
 });
 rl.on('line', function (cmd) {
-  console.log('You just typed: '+cmd);
   sio.emit('cmd:typed',cmd);
 });
 

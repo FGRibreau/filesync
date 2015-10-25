@@ -89,7 +89,7 @@ sio.on('connection', function(socket) {
 
   socket.on('cmd:typed', function(cmd) {
     // forward the event to everyone
-    console.log('you just tyoed this : ' + cmd);
+    console.log('you just typed this : ' + cmd);
     sio.emit('cmd:typed',cmd);
   });
 });
