@@ -32,7 +32,9 @@ npm i filesync -g
 filesync-server
 filesync-relay /path/to/directory
 ```
-
+## Command demo usage
+- launch relay.js, a REPL will prompt.
+- Everything you type in the REPL goes to the client's screens.
 ## How to contribute
 
 - [fork the project](https://help.github.com/articles/fork-a-repo/)
