@@ -13,7 +13,7 @@ This is a **proof of concept** AND **a work in progress**, don't share the word,
 > 
 > Both solution are stupid.
 > 
-> I want a tool that will allow each students to retrieve in real-time my edits while keeping their own local modifications. This tool will work with any editor/IDE because we sync at the file-system level. Each modifications will be display in an history log and would be either merged locally or dropped definitely.”
+> I want a tool that will allow each student to retrieve in real-time my edits while keeping their own local modifications. This tool will work with any editor/IDE because we sync at the file-system level. Each modification will be displayed in an history log and would be either merged locally or dropped definitely.”
 
 > — 03/06/2015
 
@@ -35,9 +35,9 @@ filesync-relay /path/to/directory
 
 ## How to contribute
 
-- [fork the project](https://help.github.com/articles/fork-a-repo/)
-- [clone it](https://git-scm.com/docs/git-clone) on your computer
-- run `npm install` inside `filesync/`
+- [Fork the project](https://help.github.com/articles/fork-a-repo/)
+- [Clone it](https://git-scm.com/docs/git-clone) on your computer
+- Run `npm install` inside `filesync/`
 - Let's do this!
 
 ## [Changelog](/CHANGELOG.md)
