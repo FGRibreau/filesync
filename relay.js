@@ -28,6 +28,7 @@ sio.on('connect', function() {
 });
 
 gaze(directory, function(err, watcher) {
+  console.log('1');
   if (err) {
     throw err;
   }
@@ -67,3 +68,5 @@ gaze(directory, function(err, watcher) {
   });
 
 });
+
+console.log('2');

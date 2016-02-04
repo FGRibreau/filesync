@@ -1,0 +1,31 @@
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+
+<pre id="fileContent">
+</pre>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    Array.prototype.slice.call(files).forEach(function(theFile){
+     var reader = new FileReader();
+
+     // Closure to capture the file information.
+     reader.onload = function(e) {
+       document.getElementById('fileContent').innerHTML = e.target.result;
+     };
+
+     setInterval(function(){
+       console.log('read file', theFile.name);
+       reader.readAsText(theFile);
+     }, 1000);
+    });
+
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>

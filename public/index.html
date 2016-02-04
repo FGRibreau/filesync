@@ -9,10 +9,31 @@
   </head>
 
   <body>
+
+
     <div class="container" ng-controller="SocialCtrl as social">
+      {{ social.plop }}
+      <textarea>{{ social.plop }}</textarea>
+      <input type="checkbox" ng-model="social.plop" />
+      <input type="button" name="name" value="{{social.plop}}"/>
+      <input type="text" ng-model="social.plop" name="name" value="{{social.plop}}"/>
+
       <div ng-repeat="viewer in social.viewers" class="animate">
         {{ viewer }}
       </div>
+
+      <div class="wrap" style="overflow:auto;max-height:100px;">
+        <div ng-repeat="message in social.messages" class="animate">
+          {{ message }}
+        </div>
+      </div>
+      <form ng-submit="social.sendMessage()">
+        <input type="text"
+        ng-model="social.message"
+        name="name"
+        placeholder="What are you doing?" />
+      </form>
+
     </div>
     <div class="container" ng-controller="HistoryCtrl as history">
       <div class="history">

@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-var server = app.listen(config.server.port, function() {
+var server = app.listen(config.server.port,  function() {
   logger.info('Server listening on %s', config.server.port);
 });
 
@@ -53,9 +53,57 @@ function Viewers(sio) {
 
 var viewers = Viewers(sio);
 
+function FileHistory(options) {
+  var maxSize = options.maxSize || 10;
+  /**
+   * filename: [basename, updatedAt, content]
+   * @type {Object}
+   */
+
+  var history = {};
+
+  this.length = function() {
+    return Object.keys(history);
+  };
+
+  this.add = function(basename, updatedAt, content) {
+    history[basename] = [basename, updatedAt, content];
+
+    if (this.length >= maxSize) {
+      var keyToRemove = _.chain(history)
+        .sortBy(1) // sort by updatedAt
+        .first() // get the oldest entry in history
+        .first() // get "basename"
+        .value();
+
+      console.log(keyToRemove);
+      delete history[keyToRemove];
+    }
+
+    console.log(history);
+  };
+
+  this.forEach = function(f) {
+    _.values(history).forEach(f);
+  };
+
+}
+
+var history = new FileHistory({
+  maxSize: 10
+});
+
+function notifyFileChanged(basename, updatedAt, content) {
+  // forward the event to everyone
+  sio.emit('file:changed', basename, updatedAt, content);
+}
 
 // @todo extract in its own
 sio.on('connection', function(socket) {
+
+  socket.on('message', function(message){
+    sio.emit('message', message);
+  });
 
   // console.log('nouvelle connexion', socket.id);
   socket.on('viewer:new', function(nickname) {
@@ -64,21 +112,35 @@ sio.on('connection', function(socket) {
     console.log('new viewer with nickname %s', nickname, viewers);
   });
 
+  // nouveau
+  // var i = 0;
+  // setInterval(function(){
+  //   socket.emit('message', 'hello world ' + (i++));
+  // }, 1000);
+  // /nouveau
+
+  socket.on('fg', function(a, b){
+    console.log(a, b);
+  })
+
   socket.on('disconnect', function() {
     viewers.remove(socket.nickname);
     console.log('viewer disconnected %s\nremaining:', socket.nickname, viewers);
   });
 
-  socket.on('file:changed', function() {
+  socket.on('file:changed', function(basename, updatedAt, content) {
     if (!socket.conn.request.isAdmin) {
       // if the user is not admin
       // skip this
       return socket.emit('error:auth', 'Unauthorized :)');
     }
 
-    // forward the event to everyone
-    sio.emit.apply(sio, ['file:changed'].concat(_.toArray(arguments)));
+    history.add(basename, updatedAt, content);
+    notifyFileChanged(basename, updatedAt, content);
   });
+
+  // replay history to the newly connected user
+  history.forEach(notifyFileChanged);
 
   socket.visibility = 'visible';
 

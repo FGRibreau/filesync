@@ -4,7 +4,7 @@
   "description": "[WorkInProgress - ProofOfConcept] Unidirectional 1-N file syncing with history and local merging",
   "scripts": {
     "start": "./bin/filesync",
-    "postinstall": "./node_modules/.bin/bower install",
+    "postinstall": "bower install",
     "prepublish": "[ -r ~/.global.npmignore ] && cat ~/.global.npmignore > .npmignore;cat .gitignore >> .npmignore;"
   },
   "bin": {

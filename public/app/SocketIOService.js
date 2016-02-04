@@ -2,6 +2,7 @@
 angular.module('FileSync')
   .factory('SocketIOService', ['io', '_', '$timeout', function(io, _, $timeout) {
     var socket = io();
+    window.socket = socket;
     var _onFileChanged = _.noop;
     var _onVisibilityStatesChanged = _.noop;
 
@@ -31,6 +32,14 @@ angular.module('FileSync')
     });
 
     return {
+      onChatMessage: function(f){
+        socket.on('message', f);
+      },
+
+      sendChatMessage: function(message){
+        socket.emit('message', message);
+      },
+
       onViewersUpdated: function(f) {
         socket.on('viewers:updated', f);
       },
