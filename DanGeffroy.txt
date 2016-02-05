@@ -1,0 +1,7 @@
+J'ai ajouté comme convenu la possibilité de taper des commandes sur un repl 
+et que ces commandes soient transmises aux étudiants suivants le cours sur filesync.
+
+Le repl apparait directement au lancement de relay.js, il suffit ensuite de se servir de ce repl pour vos démonstrations.  
+
+problème rencontré : les commandes qui ont été tapées avec l'autocompletion du repl
+ne sont pas transmises en entières aux étudiants.

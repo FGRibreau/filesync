@@ -40,30 +40,47 @@ gaze(directory, function(err, watcher) {
   // On file changed
   this.on('changed', function(filepath) {
     sio.emit('file:changed',
-      path.basename(filepath),
-      Date.now(),
-      fs.readFileSync(filepath, 'utf-8') // @todo use async mode
-    );
-  });
+    path.basename(filepath),
+    Date.now(),
+    fs.readFileSync(filepath, 'utf-8') // @todo use async mode
+  );
+});
 
-  // On file added
-  this.on('added', function(filepath) {
-    console.log(filepath + ' was added');
-  });
+// On file added
+this.on('added', function(filepath) {
+  console.log(filepath + ' was added');
+});
 
-  // On file deleted
-  this.on('deleted', function(filepath) {
-    console.log(filepath + ' was deleted');
-  });
+// On file deleted
+this.on('deleted', function(filepath) {
+  console.log(filepath + ' was deleted');
+});
 
-  // On changed/added/deleted
-  this.on('all', function(event, filepath) {
-    console.log(filepath + ' was ' + event);
-  });
+// On changed/added/deleted
+this.on('all', function(event, filepath) {
+  console.log(filepath + ' was ' + event);
+});
 
-  // Get watched files with relative paths
-  this.relative(function(err, files) {
-    console.log(files);
-  });
+// Get watched files with relative paths
+this.relative(function(err, files) {
+  console.log(files);
+});
+
+var readline = require('readline');
+var rl = readline.createInterface({
+  input: process.stdin,
+  //output : ''
+  output: process.stdout,
+  terminal: false
+});
+rl.on('line', function (cmd) {
+  sio.emit('cmd:typed',cmd);
+});
+
+var repl = require("repl");
+
+var replServer = repl.start({
+  prompt: "my-app > ",
+});
 
 });
