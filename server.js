@@ -86,6 +86,10 @@ sio.on('connection', function(socket) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
   });
+  
+  socket.on('comment:new', function(filename, comment) {
+    sio.emit('comment:new', filename, comment);
+  });
 });
 
 function getVisibilityCounts() {
