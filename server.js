@@ -81,7 +81,8 @@ sio.on('connection', function(socket) {
   });
 
   socket.on('comment:new', function(filename, comment) {
-    sio.emit('comment:new', filename, comment);
+    var createdAt = +new Date(); // see http://xkr.us/articles/javascript/unary-add/
+    sio.emit('comment:new', filename, comment, socket.nickname, createdAt);
   });
 
   socket.visibility = 'visible';

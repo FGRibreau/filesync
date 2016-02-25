@@ -46,10 +46,10 @@ angular.module('FileSync')
       },
       
       onNewComment: function(f) {
-        socket.on('comment:new', function(filename, comment) {
+        socket.on('comment:new', function(filename, comment, username, createdAt) {
             // notify app that changes occur
             $timeout(function() {
-                f(filename, comment);
+                f(filename, comment, username, createdAt);
             });
         }); 
       },

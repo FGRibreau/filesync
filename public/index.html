@@ -44,7 +44,9 @@
 								</button>
                                 <div ng-show="commentBoxOpened">
                                     <ul>
-                                        <li ng-repeat="comment in commentBox.comments[edit.filename]">{{ comment.content }}</li>
+                                        <li ng-repeat="comment in commentBox.comments[edit.filename]">
+                                            <i>{{ comment.createdAt | date : "dd/MM 'à' HH:mm:ss" }}</i> {{ comment.username }}: {{ comment.content }}
+                                        </li>
                                     </ul>
                                     
                                     <form ng-submit="commentBox.addComment(edit.filename)">
