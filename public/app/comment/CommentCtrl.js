@@ -9,8 +9,10 @@ angular.module('FileSync').controller('CommentCtrl', ['$scope', 'CommentService'
     };
     
     this.addComment = function(filename) {
-        CommentService.addComment(filename, this.comment);
-        this.comment = "";
+        if (this.comment) {
+            CommentService.addComment(filename, this.comment);
+            this.comment = "";
+        }
     };
     
     this.countComments = function(filename) {
