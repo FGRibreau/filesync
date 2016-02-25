@@ -42,8 +42,8 @@
 								<button class="btn btn-primary" ng-click="commentBox.actionCommentBox()">
                                     Commentaires (<span ng-bind="commentBox.countComments(edit.filename)"></span>)
 								</button>
-                                <div ng-show="commentBoxOpened">
-                                    <ul>
+                                <div id="CommentBox" ng-show="commentBoxOpened">
+                                    <ul id="CommentsList">
                                         <li ng-repeat="comment in commentBox.comments[edit.filename]">
                                             <i>{{ comment.createdAt | date : "dd/MM 'à' HH:mm:ss" }}</i> {{ comment.username }}: {{ comment.content }}
                                         </li>
