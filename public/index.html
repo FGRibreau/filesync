@@ -36,10 +36,12 @@
 
 							<div class="cell col-xs-1 options">
 								<button ng-click="history.remove(edit)" class="btn btn-danger">x</button>
-							</div> 
+							</div>
                             
                             <div class="col-xs-12" ng-controller="CommentCtrl as commentBox">
-								<button class="btn btn-primary" ng-click="commentBox.actionCommentBox()">Commentaires</button>
+								<button class="btn btn-primary" ng-click="commentBox.actionCommentBox()">
+                                    Commentaires (<span ng-bind="commentBox.countComments(edit.filename)"></span>)
+								</button>
                                 <div ng-show="commentBoxOpened">
                                     <ul>
                                         <li ng-repeat="comment in commentBox.comments[edit.filename]">{{ comment }}</li>

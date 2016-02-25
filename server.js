@@ -80,15 +80,15 @@ sio.on('connection', function(socket) {
     sio.emit.apply(sio, ['file:changed'].concat(_.toArray(arguments)));
   });
 
+  socket.on('comment:new', function(filename, comment) {
+    sio.emit('comment:new', filename, comment);
+  });
+
   socket.visibility = 'visible';
 
   socket.on('user-visibility:changed', function(state) {
     socket.visibility = state;
     sio.emit('users:visibility-states', getVisibilityCounts());
-  });
-  
-  socket.on('comment:new', function(filename, comment) {
-    sio.emit('comment:new', filename, comment);
   });
 });
 

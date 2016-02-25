@@ -50,12 +50,12 @@ angular.module('FileSync')
             // notify app that changes occur
             $timeout(function() {
                 f(filename, comment);
-            }); 
+            });
         }); 
       },
       
       addComment: function(filename, comment){
-          socket.emit('comment:new', filename, comment);
+        socket.emit('comment:new', filename, comment);
       },
     };
   }]);
