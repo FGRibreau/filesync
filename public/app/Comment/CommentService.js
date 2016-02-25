@@ -9,7 +9,9 @@ angular.module('FileSync')
                 comments[filename] = [];
             }
             
-            comments[filename].unshift(comment);
+            comments[filename].unshift({
+                content: comment,
+            });
         });
 
         return {
