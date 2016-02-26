@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html ng-app="FileSync">
   <head>
@@ -6,15 +8,55 @@
     <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/components/highlightjs/styles/github.css"/>
     <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="/app/css/chat.css"/>
   </head>
 
   <body>
-    <div class="container" ng-controller="SocialCtrl as social">
-      <div ng-repeat="viewer in social.viewers" class="animate">
-        {{ viewer }}
+    <div class="container col-xs-1" ng-controller="SocialCtrl as social">
+      <div ng-if="social.viewers.length ===0">
+        You are alone !
+        <div ng-repeat="viewer in social.viewers" class="animate">
+          {{ viewer }}
+        </div>
+      </div>
+      <div ng-if="social.viewers.length > 0" >
+        Users connected :
+        <div ng-repeat="viewer in social.viewers" class="animate">
+          {{ viewer }}
+        </div>
       </div>
     </div>
-    <div class="container" ng-controller="HistoryCtrl as history">
+
+    <div class="container panel panel-default chat-container chatCSS col-xs-5" ng-controller="ChatCtrl as chat">
+      <div class="panel-heading">
+        Chat
+      </div>
+
+      <div class="animate chat-messages panel-body">
+        <div class="alert alert-info" ng-if="chat.messages.length ===0">
+          Pas encore de messages!
+        </div>
+        <ul ng-if="chat.messages.length > 0">
+          <li ng-repeat="message in chat.messages">
+            {{message.createdAt | date:"MM/dd/yyyy 'at' H:mm:ss"}} - 
+            <span ng-bind="message.username" ng-attr-title=""></span> : 
+            <span ng-bind="message.message"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="chat-options row-fluid panel-body">
+        <form class="form-inline">
+          <div class="form-group" style="width:80%">
+            <input ng-model="chat.message" type="text" class="form-control" style="width:100%" placeholder="What are you thinking about?" value="" />
+          </div>
+          <div class="form-group"  style="width:19%">
+            <button ng-click="chat.sendMessage()" style="width:100%" type="submit" name="button" class="btn btn-success">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container col-xs-6" ng-controller="HistoryCtrl as history">
       <div class="history">
 
         <div class="row-fluid">
@@ -25,7 +67,7 @@
         <div class="row-fluid">
           <div ng-repeat="edit in history.edits" class="animate">
             <div class="line well ng-cloak">
-	      <div class="row">
+        <div class="row">
 
                 <div class="cell col-xs-2">
                   {{ edit.timestamp | date : format : shortTime }}
@@ -39,11 +81,11 @@
                   <a href ng-click="history.remove(edit)" class="btn btn-danger" title="">x</a>
                 </div>
 
-	        <div class="col-xs-12">
-                  <div hljs source="edit.content">
-                    <textarea></textarea>
-  	          </div>
-	        </div>
+          <div class="col-xs-12">
+              <div hljs source="edit.content">
+                <textarea></textarea>
+              </div>
+          </div>
 
               </div>
 
@@ -61,9 +103,9 @@
 
   <script src="/components/angular/angular.js" type="text/javascript"></script>
   <script src="/components/angular-animate/angular-animate.js" type="text/javascript"></script>
+  <script src="/components/highlightjs/highlight.pack.js" type="text/javascript"></script>
   <script src="/components/angular-highlightjs/angular-highlightjs.js" type="text/javascript"></script>
 
-  <script src="/components/highlightjs/highlight.pack.js" type="text/javascript"></script>
   <script src="/components/moment/moment.js" type="text/javascript"></script>
   <script src="/components/lodash/lodash.js" type="text/javascript"></script>
   <script src="/components/visibilityjs/lib/visibility.core.js" type="text/javascript"></script>
@@ -74,5 +116,8 @@
   <script src="/app/SocketIOService.js" type="text/javascript"></script>
   <script src="/app/SocialCtrl.js" type="text/javascript"></script>
   <script src="/app/VisibilityService.js" type="text/javascript"></script>
+  <script src="/app/chat/ChatCtrl.js" type="text/javascript"></script>
+  <script src="/app/chat/ChatService.js" type="text/javascript"></script>
   </body>
 </html>
+

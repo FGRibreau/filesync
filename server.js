@@ -53,10 +53,8 @@ function Viewers(sio) {
 
 var viewers = Viewers(sio);
 
-
 // @todo extract in its own
 sio.on('connection', function(socket) {
-
   // console.log('nouvelle connexion', socket.id);
   socket.on('viewer:new', function(nickname) {
     socket.nickname = nickname;
@@ -69,6 +67,12 @@ sio.on('connection', function(socket) {
     console.log('viewer disconnected %s\nremaining:', socket.nickname, viewers);
   });
 
+  socket.on('chat:message:new', function(message) {
+    var created = +new Date();
+    console.log('chat:message:new', socket.nickname, message, created);
+    sio.emit('chat:message:new', socket.nickname, message, created);
+  });
+
   socket.on('file:changed', function() {
     if (!socket.conn.request.isAdmin) {
       // if the user is not admin
@@ -78,6 +82,11 @@ sio.on('connection', function(socket) {
 
     // forward the event to everyone
     sio.emit.apply(sio, ['file:changed'].concat(_.toArray(arguments)));
+  });
+
+  socket.on('message', function(message)
+  {
+    sio.emit('message', message);
   });
 
   socket.visibility = 'visible';
