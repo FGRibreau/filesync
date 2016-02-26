@@ -31,6 +31,19 @@ angular.module('FileSync')
     });
 
     return {
+      sendMessage: function(message){
+        socket.emit('chat:message:new', message);
+      },
+
+      onNewChatMessage: function(f){
+        socket.on('chat:message:new', function(username, message, createdAt){
+          console.log(username, message, createdAt);
+          $timeout(function() {
+            f(username, message, createdAt);
+          });
+        });
+      },
+
       onViewersUpdated: function(f) {
         socket.on('viewers:updated', f);
       },
