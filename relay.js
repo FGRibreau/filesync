@@ -9,7 +9,7 @@ var config = require('./config')(logger);
 var directory = path.resolve(__dirname, process.argv[2]);
 
 if (!directory) {
-  logger.error("Usage: node server.js /path/to/directory");
+  logger.error("Usage: node server.js /path/to/directory/**");
   process.exit(1);
 }
 
@@ -17,15 +17,24 @@ logger.info('listening on %s', directory);
 
 var SOCKET_IO_URL = config.server.exposed_endpoint + '/?access_token=' + config.auth.token;
 
+
+if(!directory.includes('**')){
+  logger.error("Directory should ends with /**, or /**/*(!(exclude_pattern.js))");
+  process.exit(1);
+}
+
+var DIRECTORY_BASE = path.dirname(directory).replace('**', '');
+
 logger.info('connecting...');
 var sio = io(SOCKET_IO_URL, {
-  transports: ['websocket', 'polling'],
+  transports: ['polling'],
   multiplex: false
 });
 
 sio.on('connect', function() {
   logger.info('connected!');
 });
+
 
 gaze(directory, function(err, watcher) {
   console.log('1');
@@ -41,7 +50,7 @@ gaze(directory, function(err, watcher) {
   // On file changed
   this.on('changed', function(filepath) {
     sio.emit('file:changed',
-      path.basename(filepath),
+      filepath.replace(DIRECTORY_BASE, ''),
       Date.now(),
       fs.readFileSync(filepath, 'utf-8') // @todo use async mode
     );
